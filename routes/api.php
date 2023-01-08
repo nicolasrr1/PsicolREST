@@ -18,6 +18,8 @@ Route::namespace('App\\Http\\Controllers')->group(function () {
     //UsersController
     Route::controller(UsersController::class)->group(function () {
         Route::post('/users', 'store');
+        Route::get('/users', 'index');
+
         Route::delete('/delete/{id}', 'delete');
         Route::put('/update', 'update');
     });

@@ -15,6 +15,19 @@ class UsersController extends Controller
 
     public function index()
     {
+        try {
+            $data = DB::table('users')
+            ->join('rol', 'users.rol_id', '=', 'rol.id')
+            ->select('users.*', 'rol.rol_name')
+            ->get();
+
+            return response()->json($data);
+
+        } catch (\Throwable $th) {
+           return $th;
+        }
+
+     
     }
 
     /**
