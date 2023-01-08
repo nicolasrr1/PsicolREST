@@ -14,6 +14,29 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+Route::namespace('App\\Http\\Controllers')->group(function () {
+    //UsersController
+    Route::controller(UsersController::class)->group(function () {
+        Route::post('/users', 'store');
+        Route::delete('/delete/{id}', 'delete');
+        Route::put('/update', 'update');
+    });
+    //SubjectsController
+    Route::controller(SubjectsController::class)->group(function () {
+        Route::get('/subjects', 'index');
+        Route::post('/subjects', 'store');
+        Route::put('/subjects', 'update');
+        Route::delete('/subjects/{id}', 'delete');
+    });
+    //SubjectUserController
+    Route::controller(SubjectUserController::class)->group(function () {
+        Route::post('/asignar', 'store');
+        Route::put('/asignar', 'update');
+        Route::get('/asignar', 'index');
+    });
+
+    Route::controller(CreditsController::class)->group(function () {
+        Route::get('/credit/{id}', 'index');
+        Route::post('/credit', 'store');
+    });
 });
